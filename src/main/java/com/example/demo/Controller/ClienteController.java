@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Model.Cliente;
@@ -23,11 +24,35 @@ public class ClienteController {
 	
 	
 	@GetMapping
-	public ResponseEntity<?> getODT(){
+	public ResponseEntity<?> getClientes(){
 		
 		return clienteService.getClientes();
 
 	}
+	
+	@GetMapping("/requestparam")
+	public ResponseEntity<?> getClientesById(@RequestParam("tipo") int tipo,
+			@RequestParam(value="observacao", required=false) String observacao){
+		
+		//return clienteService.getClientesByTipo(tipo);
+		return clienteService.getClientesByTipoAndObservacao(tipo, observacao);
+
+	}
+	
+	@GetMapping("/inativo/{inativo}")
+	public ResponseEntity<?> countInativo(@PathVariable boolean inativo){
+		
+		return clienteService.countByInativo(inativo);
+
+	}
+	
+	@GetMapping("/ativo/genero/{genero}")
+	public ResponseEntity<?> findAtivoGenero(@PathVariable int genero){
+		
+		return clienteService.getAtivosGenero(genero);
+
+	}
+	
 	
 	@PostMapping
 	public ResponseEntity<?> adicionarCliente(@RequestBody Cliente cliente) {

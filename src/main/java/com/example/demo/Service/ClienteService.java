@@ -28,6 +28,30 @@ public class ClienteService {
 		
 	}
 	
+	public ResponseEntity<?> getClientesByTipo(int tipo){
+		
+		return ResponseEntity.ok(clienteRepository.findByTipo(tipo));
+		
+	}
+	
+	public ResponseEntity<?> getClientesByTipoAndObservacao(int tipo, String observacao){
+		
+		return ResponseEntity.ok(clienteRepository.findByTipoAndObservacaoContaining(tipo, observacao));
+		
+	}
+	
+	public ResponseEntity<?> countByInativo(boolean inativo){
+		
+		return ResponseEntity.ok(clienteRepository.countByInativo(inativo));
+		
+	}
+	
+	public ResponseEntity<?> getAtivosGenero(int genero){
+		
+		return ResponseEntity.ok(clienteRepository.findAtivosGenero(genero));
+		
+	}
+	
 	public ResponseEntity<?> atualizarCliente(Cliente cliente){
 		
 		if(! clienteRepository.existsById(cliente.getNome())) {
