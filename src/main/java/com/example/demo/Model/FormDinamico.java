@@ -8,7 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -26,6 +28,10 @@ public class FormDinamico {
 	@OneToMany(cascade = CascadeType.ALL,
             mappedBy = "formDinamico",fetch = FetchType.LAZY)
 	List<Valor> valores;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(unique = true)
+	CampoCadastroPessoaFisica fisica;
 	
 	
 	
@@ -59,6 +65,14 @@ public class FormDinamico {
 	public void setValores(List<Valor> valores) {
 		this.valores = valores;
 	}
+	public CampoCadastroPessoaFisica getFisica() {
+		return fisica;
+	}
+	public void setFisica(CampoCadastroPessoaFisica fisica) {
+		this.fisica = fisica;
+	}
+	
+	
 	
 	
 	
