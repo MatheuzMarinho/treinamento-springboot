@@ -15,6 +15,10 @@ public class ClienteService {
 	ClienteRepository clienteRepository;
 	
 	public ResponseEntity<?> criarCliente(Cliente cliente){
+	
+		if(clienteRepository.existsById(cliente.getNome())) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Usuário já cadastrado!");
+		}
 		
 		clienteRepository.save(cliente);
 		
@@ -25,6 +29,15 @@ public class ClienteService {
 	public ResponseEntity<?> getClientes(){
 		
 		return ResponseEntity.ok(clienteRepository.findAll());
+		
+	}
+	
+	public ResponseEntity<?> getClientesByNome(String nome){
+		if(! clienteRepository.existsById(nome)) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Usuário não cadastrado!");
+		}
+		
+		return ResponseEntity.ok(clienteRepository.findById(nome));
 		
 	}
 	

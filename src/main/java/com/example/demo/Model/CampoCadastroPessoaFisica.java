@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class CampoCadastroPessoaFisica {
@@ -13,10 +12,7 @@ public class CampoCadastroPessoaFisica {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
-	
-	@OneToOne(mappedBy = "fisica")
-    private FormDinamico formDinamico;
-	
+
 	
 	boolean pai;
 	boolean mae;
@@ -29,9 +25,6 @@ public class CampoCadastroPessoaFisica {
 		this.id = id;
 	}
 	
-	public void setFormDinamico(FormDinamico formDinamico) {
-		this.formDinamico = formDinamico;
-	}
 	public boolean isPai() {
 		return pai;
 	}

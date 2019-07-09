@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Model.Cliente;
 import com.example.demo.Service.ClienteService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
@@ -28,6 +30,13 @@ public class ClienteController {
 		
 		return clienteService.getClientes();
 
+	}
+	
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<?> getByNome(@PathVariable String nome) {
+		
+		return clienteService.getClientesByNome(nome);
+		
 	}
 	
 	@GetMapping("/requestparam")
